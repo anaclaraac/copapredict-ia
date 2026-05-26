@@ -7,7 +7,7 @@ from sklearn.linear_model import LogisticRegression
 
 
 dados = pd.read_csv(
-    "data/processed/model_input.csv"
+    "data/processed/advanced_model_input.csv"
 )
 
 
@@ -17,17 +17,16 @@ dados = dados.replace(
 )
 
 features = [
-
-    "home_attack_avg",
-
-    "away_attack_avg",
-
-    "home_form",
-
-    "attack_strength",
-
-    "avg_goals"
-
+"home_attack_avg",
+"away_attack_avg",
+"home_defense_avg",
+"away_defense_avg",
+"home_form",
+"away_form",
+"win_streak",
+"loss_streak",
+"attack_strength",
+"avg_goals"
 ]
 
 dados = dados.dropna(
