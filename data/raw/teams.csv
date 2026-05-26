@@ -1,0 +1,334 @@
+team_id,country,continent,fifa_code
+1,Abkhazia,Unknown,ABK
+2,Afghanistan,Unknown,AFG
+3,Albania,Unknown,ALB
+4,Alderney,Unknown,ALD
+5,Algeria,Unknown,ALG
+6,Ambazonia,Unknown,AMB
+7,American Samoa,Unknown,AME
+8,Andalusia,Unknown,AND
+9,Andorra,Unknown,AND
+10,Angola,Unknown,ANG
+11,Anguilla,Unknown,ANG
+12,Antigua and Barbuda,Unknown,ANT
+13,Arameans Suryoye,Unknown,ARA
+14,Argentina,South America,ARG
+15,Armenia,Unknown,ARM
+16,Artsakh,Unknown,ART
+17,Aruba,Unknown,ARU
+18,Asturias,Unknown,AST
+19,Australia,Unknown,AUS
+20,Austria,Unknown,AUS
+21,Aymara,Unknown,AYM
+22,Azerbaijan,Unknown,AZE
+23,Bahamas,Unknown,BAH
+24,Bahrain,Unknown,BAH
+25,Bangladesh,Unknown,BAN
+26,Barawa,Unknown,BAR
+27,Barbados,Unknown,BAR
+28,Basque Country,Unknown,BAS
+29,Belarus,Unknown,BEL
+30,Belgium,Unknown,BEL
+31,Belize,Unknown,BEL
+32,Benin,Unknown,BEN
+33,Bermuda,Unknown,BER
+34,Bhutan,Unknown,BHU
+35,Biafra,Unknown,BIA
+36,Bolivia,Unknown,BOL
+37,Bonaire,Unknown,BON
+38,Bosnia and Herzegovina,Unknown,BOS
+39,Botswana,Unknown,BOT
+40,Brazil,South America,BRA
+41,British Virgin Islands,Unknown,BRI
+42,Brittany,Unknown,BRI
+43,Brunei,Unknown,BRU
+44,Bulgaria,Unknown,BUL
+45,Burkina Faso,Unknown,BUR
+46,Burundi,Unknown,BUR
+47,Cambodia,Unknown,CAM
+48,Cameroon,Unknown,CAM
+49,Canada,Unknown,CAN
+50,Canary Islands,Unknown,CAN
+51,Cape Verde,Unknown,CAP
+52,Cascadia,Unknown,CAS
+53,Catalonia,Unknown,CAT
+54,Cayman Islands,Unknown,CAY
+55,Central African Republic,Unknown,CEN
+56,Central Spain,Unknown,CEN
+57,Chad,Unknown,CHA
+58,Chagos Islands,Unknown,CHA
+59,Chameria,Unknown,CHA
+60,Chechnya,Unknown,CHE
+61,Chile,Unknown,CHI
+62,China PR,Unknown,CHI
+63,Cilento,Unknown,CIL
+64,Colombia,Unknown,COL
+65,Comoros,Unknown,COM
+66,Congo,Unknown,CON
+67,Cook Islands,Unknown,COO
+68,Corsica,Unknown,COR
+69,Costa Rica,Unknown,COS
+70,County of Nice,Unknown,COU
+71,Crimea,Unknown,CRI
+72,Croatia,Unknown,CRO
+73,Cuba,Unknown,CUB
+74,Curaçao,Unknown,CUR
+75,Cyprus,Unknown,CYP
+76,Czech Republic,Unknown,CZE
+77,Czechoslovakia,Unknown,CZE
+78,DR Congo,Unknown,DR 
+79,Darfur,Unknown,DAR
+80,Denmark,Unknown,DEN
+81,Djibouti,Unknown,DJI
+82,Dominica,Unknown,DOM
+83,Dominican Republic,Unknown,DOM
+84,Donetsk PR,Unknown,DON
+85,Délvidék,Unknown,DÉL
+86,Ecuador,Unknown,ECU
+87,Egypt,Unknown,EGY
+88,El Salvador,Unknown,EL 
+89,Elba Island,Unknown,ELB
+90,Ellan Vannin,Unknown,ELL
+91,England,Unknown,ENG
+92,Equatorial Guinea,Unknown,EQU
+93,Eritrea,Unknown,ERI
+94,Estonia,Unknown,EST
+95,Eswatini,Unknown,ESW
+96,Ethiopia,Unknown,ETH
+97,Falkland Islands,Unknown,FAL
+98,Faroe Islands,Unknown,FAR
+99,Felvidék,Unknown,FEL
+100,Fiji,Unknown,FIJ
+101,Finland,Unknown,FIN
+102,France,Europe,FRA
+103,Franconia,Unknown,FRA
+104,French Guiana,Unknown,FRE
+105,Frøya,Unknown,FRØ
+106,Gabon,Unknown,GAB
+107,Galicia,Unknown,GAL
+108,Gambia,Unknown,GAM
+109,Georgia,Unknown,GEO
+110,German DR,Unknown,GER
+111,Germany,Europe,GER
+112,Ghana,Unknown,GHA
+113,Gibraltar,Unknown,GIB
+114,Gotland,Unknown,GOT
+115,Gozo,Unknown,GOZ
+116,Greece,Unknown,GRE
+117,Greenland,Unknown,GRE
+118,Grenada,Unknown,GRE
+119,Guadeloupe,Unknown,GUA
+120,Guam,Unknown,GUA
+121,Guatemala,Unknown,GUA
+122,Guernsey,Unknown,GUE
+123,Guinea,Unknown,GUI
+124,Guinea-Bissau,Unknown,GUI
+125,Guyana,Unknown,GUY
+126,Găgăuzia,Unknown,GĂG
+127,Haiti,Unknown,HAI
+128,Hitra,Unknown,HIT
+129,Hmong,Unknown,HMO
+130,Honduras,Unknown,HON
+131,Hong Kong,Unknown,HON
+132,Hungary,Unknown,HUN
+133,Iceland,Unknown,ICE
+134,India,Unknown,IND
+135,Indonesia,Unknown,IND
+136,Iran,Unknown,IRA
+137,Iraq,Unknown,IRA
+138,Iraqi Kurdistan,Unknown,IRA
+139,Isle of Man,Unknown,ISL
+140,Isle of Wight,Unknown,ISL
+141,Israel,Unknown,ISR
+142,Italy,Unknown,ITA
+143,Ivory Coast,Unknown,IVO
+144,Jamaica,Unknown,JAM
+145,Japan,Asia,JAP
+146,Jersey,Unknown,JER
+147,Jordan,Unknown,JOR
+148,Kabylia,Unknown,KAB
+149,Kazakhstan,Unknown,KAZ
+150,Kenya,Unknown,KEN
+151,Kernow,Unknown,KER
+152,Kiribati,Unknown,KIR
+153,Kosovo,Unknown,KOS
+154,Kuwait,Unknown,KUW
+155,Kyrgyzstan,Unknown,KYR
+156,Kárpátalja,Unknown,KÁR
+157,Laos,Unknown,LAO
+158,Latvia,Unknown,LAT
+159,Lebanon,Unknown,LEB
+160,Lesotho,Unknown,LES
+161,Liberia,Unknown,LIB
+162,Libya,Unknown,LIB
+163,Liechtenstein,Unknown,LIE
+164,Lithuania,Unknown,LIT
+165,Luhansk PR,Unknown,LUH
+166,Luxembourg,Unknown,LUX
+167,Macau,Unknown,MAC
+168,Madagascar,Unknown,MAD
+169,Madrid,Unknown,MAD
+170,Malawi,Unknown,MAL
+171,Malaysia,Unknown,MAL
+172,Maldives,Unknown,MAL
+173,Mali,Unknown,MAL
+174,Malta,Unknown,MAL
+175,Manchukuo,Unknown,MAN
+176,Mapuche,Unknown,MAP
+177,Marshall Islands,Unknown,MAR
+178,Martinique,Unknown,MAR
+179,Matabeleland,Unknown,MAT
+180,Maule Sur,Unknown,MAU
+181,Mauritania,Unknown,MAU
+182,Mauritius,Unknown,MAU
+183,Mayotte,Unknown,MAY
+184,Menorca,Unknown,MEN
+185,Mexico,North America,MEX
+186,Micronesia,Unknown,MIC
+187,Moldova,Unknown,MOL
+188,Monaco,Unknown,MON
+189,Mongolia,Unknown,MON
+190,Montenegro,Unknown,MON
+191,Montserrat,Unknown,MON
+192,Morocco,Unknown,MOR
+193,Mozambique,Unknown,MOZ
+194,Myanmar,Unknown,MYA
+195,Namibia,Unknown,NAM
+196,Nepal,Unknown,NEP
+197,Netherlands,Unknown,NET
+198,New Caledonia,Unknown,NEW
+199,New Zealand,Unknown,NEW
+200,Nicaragua,Unknown,NIC
+201,Niger,Unknown,NIG
+202,Nigeria,Africa,NIG
+203,Niue,Unknown,NIU
+204,North Korea,Unknown,NOR
+205,North Macedonia,Unknown,NOR
+206,North Vietnam,Unknown,NOR
+207,Northern Cyprus,Unknown,NOR
+208,Northern Ireland,Unknown,NOR
+209,Northern Mariana Islands,Unknown,NOR
+210,Norway,Unknown,NOR
+211,Occitania,Unknown,OCC
+212,Oman,Unknown,OMA
+213,Orkney,Unknown,ORK
+214,Padania,Unknown,PAD
+215,Pakistan,Unknown,PAK
+216,Palau,Unknown,PAL
+217,Palestine,Unknown,PAL
+218,Panama,Unknown,PAN
+219,Panjab,Unknown,PAN
+220,Papua New Guinea,Unknown,PAP
+221,Paraguay,Unknown,PAR
+222,Parishes of Jersey,Unknown,PAR
+223,Peru,Unknown,PER
+224,Philippines,Unknown,PHI
+225,Poland,Unknown,POL
+226,Portugal,Unknown,POR
+227,Provence,Unknown,PRO
+228,Puerto Rico,Unknown,PUE
+229,Qatar,Unknown,QAT
+230,Raetia,Unknown,RAE
+231,Republic of Ireland,Unknown,REP
+232,Republic of St. Pauli,Unknown,REP
+233,Rhodes,Unknown,RHO
+234,Romani people,Unknown,ROM
+235,Romania,Unknown,ROM
+236,Russia,Unknown,RUS
+237,Rwanda,Unknown,RWA
+238,Ryūkyū,Unknown,RYŪ
+239,Réunion,Unknown,RÉU
+240,Saare County,Unknown,SAA
+241,Saarland,Unknown,SAA
+242,Saint Barthélemy,Unknown,SAI
+243,Saint Helena,Unknown,SAI
+244,Saint Kitts and Nevis,Unknown,SAI
+245,Saint Lucia,Unknown,SAI
+246,Saint Martin,Unknown,SAI
+247,Saint Pierre and Miquelon,Unknown,SAI
+248,Saint Vincent and the Grenadines,Unknown,SAI
+249,Samoa,Unknown,SAM
+250,San Marino,Unknown,SAN
+251,Sark,Unknown,SAR
+252,Saudi Arabia,Unknown,SAU
+253,Saugeais,Unknown,SAU
+254,Scotland,Unknown,SCO
+255,Sealand,Unknown,SEA
+256,Seborga,Unknown,SEB
+257,Senegal,Unknown,SEN
+258,Serbia,Unknown,SER
+259,Seychelles,Unknown,SEY
+260,Shetland,Unknown,SHE
+261,Sierra Leone,Unknown,SIE
+262,Silesia,Unknown,SIL
+263,Singapore,Unknown,SIN
+264,Sint Maarten,Unknown,SIN
+265,Slovakia,Unknown,SLO
+266,Slovenia,Unknown,SLO
+267,Solomon Islands,Unknown,SOL
+268,Somalia,Unknown,SOM
+269,Somaliland,Unknown,SOM
+270,South Africa,Unknown,SOU
+271,South Korea,Unknown,SOU
+272,South Ossetia,Unknown,SOU
+273,South Sudan,Unknown,SOU
+274,South Yemen,Unknown,SOU
+275,Spain,Europe,SPA
+276,Sri Lanka,Unknown,SRI
+277,Sudan,Unknown,SUD
+278,Suriname,Unknown,SUR
+279,Surrey,Unknown,SUR
+280,Sweden,Unknown,SWE
+281,Switzerland,Unknown,SWI
+282,Syria,Unknown,SYR
+283,Székely Land,Unknown,SZÉ
+284,Sápmi,Unknown,SÁP
+285,São Tomé and Príncipe,Unknown,SÃO
+286,Tahiti,Unknown,TAH
+287,Taiwan,Unknown,TAI
+288,Tajikistan,Unknown,TAJ
+289,Tamil Eelam,Unknown,TAM
+290,Tanzania,Unknown,TAN
+291,Thailand,Unknown,THA
+292,Tibet,Unknown,TIB
+293,Ticino,Unknown,TIC
+294,Timor-Leste,Unknown,TIM
+295,Togo,Unknown,TOG
+296,Tonga,Unknown,TON
+297,Trinidad and Tobago,Unknown,TRI
+298,Tunisia,Unknown,TUN
+299,Turkey,Unknown,TUR
+300,Turkmenistan,Unknown,TUR
+301,Turks and Caicos Islands,Unknown,TUR
+302,Tuvalu,Unknown,TUV
+303,Two Sicilies,Unknown,TWO
+304,Uganda,Unknown,UGA
+305,Ukraine,Unknown,UKR
+306,United Arab Emirates,Unknown,UNI
+307,United Koreans in Japan,Unknown,UNI
+308,United States,North America,UNI
+309,United States Virgin Islands,Unknown,UNI
+310,Uruguay,South America,URU
+311,Uzbekistan,Unknown,UZB
+312,Vanuatu,Unknown,VAN
+313,Vatican City,Unknown,VAT
+314,Venezuela,Unknown,VEN
+315,Vietnam,Unknown,VIE
+316,Vietnam Republic,Unknown,VIE
+317,Wales,Unknown,WAL
+318,Wallis Islands and Futuna,Unknown,WAL
+319,West Papua,Unknown,WES
+320,Western Armenia,Unknown,WES
+321,Western Australia,Unknown,WES
+322,Western Isles,Unknown,WES
+323,Western Sahara,Unknown,WES
+324,Yemen,Unknown,YEM
+325,Yemen DPR,Unknown,YEM
+326,Ynys Môn,Unknown,YNY
+327,Yorkshire,Unknown,YOR
+328,Yoruba Nation,Unknown,YOR
+329,Yugoslavia,Unknown,YUG
+330,Zambia,Unknown,ZAM
+331,Zanzibar,Unknown,ZAN
+332,Zimbabwe,Unknown,ZIM
+333,Åland Islands,Unknown,ÅLA

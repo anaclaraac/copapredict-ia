@@ -1,0 +1,14 @@
+1 - tem 72 partidas com gols de mandantes e visitantes vazios
+
+2 - média de gols dos mandantes é maior
+
+3 - média de 2.9 gols por partida
+
+4 - aproximadamente 22.7% das partidas terminaram empatadas
+
+5 - total de partidas: 49287
+
+
+
+acurácia dos modelos:
+randomforest = 0.5
