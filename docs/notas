@@ -11,4 +11,7 @@
 
 
 acurácia dos modelos:
-randomforest = 0.5
+regressao logistica = 0.568
+arvore = 0.446
+randomforest = 0.517
+xgboost = 0.564
