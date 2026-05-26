@@ -7,7 +7,7 @@ from sklearn.linear_model import LogisticRegression
 
 
 dados = pd.read_csv(
-    "data/processed/advanced_model_input.csv"
+    "data/processed/context_model_input.csv"
 )
 
 
@@ -25,6 +25,11 @@ features = [
 "away_form",
 "win_streak",
 "loss_streak",
+"home_advantage",
+"tournament_weight",
+"home_continent_code",
+"away_continent_code",
+"same_continent",
 "attack_strength",
 "avg_goals"
 ]
@@ -77,7 +82,6 @@ print(
     "Acurácia:",
     score
 )
-
 
 
 joblib.dump(
