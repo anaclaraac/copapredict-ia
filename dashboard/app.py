@@ -1,5 +1,6 @@
 import streamlit as st
 import requests
+import matplotlib.pyplot as plt
 
 st.set_page_config(
     page_title="CopaPredict IA",
@@ -151,3 +152,25 @@ if st.button(
                 "Derrota",
                 f"{probs['derrota'] * 100:.1f}%"
             )
+        fig, ax = plt.subplots(figsize=(3, 2))
+
+        ax.bar(
+            ["Vitória", "Empate", "Derrota"],
+            [
+                probs["vitoria"],
+                probs["empate"],
+                probs["derrota"]
+            ]
+        )
+
+        ax.set_title(
+            "Probabilidades Previstas"
+        )
+        
+        ax.set_ylim(0,1)
+
+        ax.set_ylabel(
+            "Probabilidade"
+        )
+
+        st.pyplot(fig,use_container_width=False)
