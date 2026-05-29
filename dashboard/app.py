@@ -1,6 +1,10 @@
 import streamlit as st
 import requests
 import matplotlib.pyplot as plt
+import pandas as pd
+
+teams = pd.read_csv("data/processed/teams.csv")
+lista_times = teams["team"].tolist()
 
 st.set_page_config(
     page_title="CopaPredict IA",
@@ -15,6 +19,27 @@ st.title(
 st.write(
     "Sistema de previsão de partidas usando Machine Learnig"
 )
+
+st.markdown(
+    "## Seleções"
+)
+
+col_time1, col_time2 = st.columns(2)
+
+with col_time1:
+
+    home_team = st.selectbox(
+        "Mandante",
+        lista_times
+    )
+
+with col_time2:
+
+    away_team = st.selectbox(
+        "Visitante",
+        lista_times,
+        index=1
+    )
 
 col1, col2 = st.columns(2)
 
@@ -63,6 +88,9 @@ with col2:
         value=1
     )
 
+st.info(
+    f"{home_team} x {away_team}"
+)
 
 if st.button(
     "🔮 Fazer previsão"
