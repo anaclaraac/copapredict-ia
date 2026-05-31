@@ -207,33 +207,82 @@ def calcular_loss_streak(time):
 
     return sequencia
 
-print(
-    "Ataque Brasil:",
-    calcular_ataque("Brazil")
-)
+def gerar_features(
+    home_team,
+    away_team
+):
 
-print(
-    "Defesa Brasil:",
-    calcular_defesa("Brazil")
-)
-
-print(
-    "Forma Brasil:",
-    calcular_forma(
-        "Brazil"
+    home_attack = calcular_ataque(
+        home_team
     )
-)
 
-print(
-    "Sequência:",
-    calcular_win_streak(
-        "Brazil"
+    away_attack = calcular_ataque(
+        away_team
     )
-)
+
+    home_defense = calcular_defesa(
+        home_team
+    )
+
+    away_defense = calcular_defesa(
+        away_team
+    )
+
+    home_form = calcular_forma(
+        home_team
+    )
+
+    away_form = calcular_forma(
+        away_team
+    )
+
+    win_streak = calcular_win_streak(
+        home_team
+    )
+
+    loss_streak = calcular_loss_streak(
+        away_team
+    )
+
+    return {
+
+        "home_attack_avg": home_attack,
+
+        "away_attack_avg": away_attack,
+
+        "home_defense_avg": home_defense,
+
+        "away_defense_avg": away_defense,
+
+        "home_form": home_form,
+
+        "away_form": away_form,
+
+        "win_streak": win_streak,
+
+        "loss_streak": loss_streak,
+
+        "home_advantage": 1,
+
+        "tournament_weight": 5,
+
+        "home_continent_code": 1,
+
+        "away_continent_code": 1,
+
+        "same_continent": 0,
+
+        "attack_strength":
+            home_attack / away_defense,
+
+        "avg_goals":
+            (home_attack + away_attack) / 2
+
+    }
 
 print(
-    "Derrotas seguidas:",
-    calcular_loss_streak(
-        "Brazil"
+    gerar_features(
+        "Brazil",
+        "Argentina"
     )
 )
