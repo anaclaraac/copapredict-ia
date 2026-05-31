@@ -1,11 +1,14 @@
 import streamlit as st
 import requests
 import matplotlib.pyplot as plt
-import pandas as pd
-from features import (gerar_features, listar_times)
 
-teams = pd.read_csv("data/processed/teams.csv")
-lista_times = teams["team"].tolist()
+from features import (
+    gerar_features,
+    listar_times,
+    calcular_ataque,
+    calcular_defesa,
+    calcular_forma
+)
 
 st.set_page_config(
     page_title="CopaPredict IA",
@@ -13,36 +16,13 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title(
-    "⚽ CopaPredict IA"
-)
+st.title("⚽ CopaPredict IA")
+
+st.write("Sistema de previsão de partidas usando Machine Learning")
 
 times = listar_times()
 
-st.write(
-    "Sistema de previsão de partidas usando Machine Learnig"
-)
-
-st.markdown(
-    "## Seleções"
-)
-
-col_time1, col_time2 = st.columns(2)
-
-with col_time1:
-
-    home_team = st.selectbox(
-        "Mandante",
-        lista_times
-    )
-
-with col_time2:
-
-    away_team = st.selectbox(
-        "Visitante",
-        lista_times,
-        index=1
-    )
+st.markdown("## Seleções")
 
 col1, col2 = st.columns(2)
 
@@ -62,35 +42,70 @@ with col2:
         index=times.index("Argentina")
     )
 
+st.info(f"{home_team} x {away_team}")
 
-st.info(
-    f"{home_team} x {away_team}"
-)
+col_stats1, col_stats2 = st.columns(2)
 
-if st.button(
-    "🔮 Fazer previsão"
-):
-    dados = gerar_features(home_team, away_team)
+with col_stats1:
+
+    st.markdown(
+        f"### {home_team}"
+    )
+
+    st.write(
+        f"⚔️ Ataque: {calcular_ataque(home_team):.2f}"
+    )
+
+    st.write(
+        f"🛡️ Defesa: {calcular_defesa(home_team):.2f}"
+    )
+
+    st.write(
+        f"📈 Forma: {calcular_forma(home_team):.2f}"
+    )
+
+with col_stats2:
+
+    st.markdown(
+        f"### {away_team}"
+    )
+
+    st.write(
+        f"⚔️ Ataque: {calcular_ataque(away_team):.2f}"
+    )
+
+    st.write(
+        f"🛡️ Defesa: {calcular_defesa(away_team):.2f}"
+    )
+
+    st.write(
+        f"📈 Forma: {calcular_forma(away_team):.2f}"
+    )
+
+if st.button("🔮 Fazer previsão"):
+
+    dados = gerar_features(
+        home_team,
+        away_team
+    )
 
     resposta = requests.post(
         "http://127.0.0.1:8000/predict",
         json=dados
     )
 
-
     if resposta.status_code == 200:
 
         resultado = resposta.json()
-        probs = resultado["probabilities"]
 
         if "prediction" in resultado:
 
-            mapa = {
+            probs = resultado["probabilities"]
 
+            mapa = {
                 0: "Derrota",
                 1: "Empate",
                 2: "Vitória"
-
             }
 
             classe = resultado["prediction"]
@@ -98,55 +113,114 @@ if st.button(
             st.success(
                 f"Resultado previsto: {mapa[classe]}"
             )
+            probs = resultado["probabilities"]
+
+            prob_derrota = probs["derrota"]
+            prob_empate = probs["empate"]
+            prob_vitoria = probs["vitoria"]
+
+            prob_derrota = round(
+                prob_derrota * 100,
+                2
+            )
+
+            prob_empate = round(
+                prob_empate * 100,
+                2
+            )
+
+            prob_vitoria = round(
+                prob_vitoria * 100,
+                2
+            )
+
+            st.subheader(
+                "Probabilidades"
+            )
+
+            st.write(
+                f"🏆 Vitória ({prob_vitoria}%)"
+            )
+
+            st.progress(
+                prob_vitoria / 100
+            )
+
+            st.write(
+                f"🤝 Empate ({prob_empate}%)"
+            )
+
+            st.progress(
+                prob_empate / 100
+            )
+
+            st.write(
+                f"❌ Derrota ({prob_derrota}%)"
+            )
+
+            st.progress(
+                prob_derrota / 100
+            )
+
+            st.markdown("## 📊 Probabilidades")
+
+            col_prob1, col_prob2, col_prob3 = st.columns(3)
+
+            with col_prob1:
+
+                st.metric(
+                    "Vitória",
+                    f"{probs['vitoria'] * 100:.1f}%"
+                )
+
+            with col_prob2:
+
+                st.metric(
+                    "Empate",
+                    f"{probs['empate'] * 100:.1f}%"
+                )
+
+            with col_prob3:
+
+                st.metric(
+                    "Derrota",
+                    f"{probs['derrota'] * 100:.1f}%"
+                )
+
+            fig, ax = plt.subplots(
+                figsize=(4, 2.5)
+            )
+
+            ax.bar(
+                ["Vitória", "Empate", "Derrota"],
+                [
+                    probs["vitoria"],
+                    probs["empate"],
+                    probs["derrota"]
+                ]
+            )
+
+            ax.set_title(
+                "Probabilidades Previstas"
+            )
+
+            ax.set_ylim(0, 1)
+
+            ax.set_ylabel(
+                "Probabilidade"
+            )
+
+            st.pyplot(
+                fig,
+                use_container_width=False
+            )
 
         else:
 
-            st.error(
-                resultado
-            )
-        st.markdown("## 📊 Probabilidades")
+            st.error(resultado)
 
-        col_prob1, col_prob2, col_prob3 = st.columns(3)
+    else:
 
-        with col_prob1:
-
-            st.metric(
-                "Vitória",
-                f"{probs['vitoria'] * 100:.1f}%"
-            )
-
-        with col_prob2:
-
-            st.metric(
-                "Empate",
-                f"{probs['empate'] * 100:.1f}%"
-            )
-
-        with col_prob3:
-
-            st.metric(
-                "Derrota",
-                f"{probs['derrota'] * 100:.1f}%"
-            )
-        fig, ax = plt.subplots(figsize=(3, 2))
-
-        ax.bar(
-            ["Vitória", "Empate", "Derrota"],
-            [
-                probs["vitoria"],
-                probs["empate"],
-                probs["derrota"]
-            ]
+        st.error(
+            f"Erro na API ({resposta.status_code})"
         )
-
-        ax.set_title(
-            "Probabilidades Previstas"
-        )
-        
-        ax.set_ylim(0,1)
-
-        ax.set_ylabel(
-            "Probabilidade"
-        )
-
-        st.pyplot(fig,use_container_width=False)
