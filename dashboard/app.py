@@ -1,7 +1,9 @@
 import streamlit as st
 import requests
 import matplotlib.pyplot as plt
-
+import pandas as pd
+from pathlib import Path
+from datetime import datetime
 from features import (
     gerar_features,
     listar_times,
@@ -11,6 +13,49 @@ from features import (
     ultimos_jogos,
     ranking_forca
 )
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+HISTORY_FILE = (
+    BASE_DIR
+    / "history"
+    / "predictions.csv"
+)
+
+def salvar_previsao(
+    home_team,
+    away_team,
+    prediction,
+    probs
+):
+
+    novo = pd.DataFrame([
+        {
+            "data_hora": datetime.now(),
+            "home_team": home_team,
+            "away_team": away_team,
+            "prediction": prediction,
+            "prob_vitoria": probs["vitoria"],
+            "prob_empate": probs["empate"],
+            "prob_derrota": probs["derrota"]
+        }
+    ])
+
+    if HISTORY_FILE.exists():
+
+        novo.to_csv(
+            HISTORY_FILE,
+            mode="a",
+            header=False,
+            index=False
+        )
+
+    else:
+
+        novo.to_csv(
+            HISTORY_FILE,
+            index=False
+        )
 
 st.set_page_config(
     page_title="CopaPredict IA",
@@ -136,6 +181,13 @@ if st.button("🔮 Fazer previsão"):
 
             classe = resultado["prediction"]
 
+            salvar_previsao(
+                home_team,
+                away_team,
+                mapa[classe],
+                probs
+            )
+
             st.success(
                 f"Resultado previsto: {mapa[classe]}"
             )
@@ -244,6 +296,18 @@ if st.button("🔮 Fazer previsão"):
         else:
 
             st.error(resultado)
+
+        if HISTORY_FILE.exists():
+
+            st.markdown("## Histórico de previsões")
+
+            historico = pd.read_csv(
+                HISTORY_FILE
+            )
+
+            st.dataframe(
+                historico.tail(20)
+            )
 
     else:
 
