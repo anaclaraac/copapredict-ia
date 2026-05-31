@@ -8,7 +8,8 @@ from features import (
     calcular_ataque,
     calcular_defesa,
     calcular_forma,
-    ultimos_jogos
+    ultimos_jogos,
+    ranking_forca
 )
 
 st.set_page_config(
@@ -98,6 +99,15 @@ with col_hist2:
     st.dataframe(
         ultimos_jogos(away_team)
     )
+
+st.markdown(
+    "## Ranking IA"
+)
+
+st.dataframe(
+    ranking_forca().head(20)
+)
+
 if st.button("🔮 Fazer previsão"):
 
     dados = gerar_features(

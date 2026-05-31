@@ -308,6 +308,45 @@ def ultimos_jogos(time):
         ]
     ].tail(5)
 
+def ranking_forca():
+
+    ranking = []
+
+    for time in listar_times():
+
+        try:
+
+            score = (
+                calcular_ataque(time)
+                +
+                calcular_forma(time)
+                -
+                calcular_defesa(time)
+            )
+
+            ranking.append(
+                [time, score]
+            )
+
+        except:
+
+            pass
+
+    ranking = pd.DataFrame(
+        ranking,
+        columns=[
+            "team",
+            "score"
+        ]
+    )
+
+    ranking = ranking.sort_values(
+        "score",
+        ascending=False
+    )
+
+    return ranking
+
 print(
     gerar_features(
         "Brazil",
