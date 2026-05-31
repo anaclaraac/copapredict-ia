@@ -2,6 +2,7 @@ import streamlit as st
 import requests
 import matplotlib.pyplot as plt
 import pandas as pd
+from features import (gerar_features, listar_times)
 
 teams = pd.read_csv("data/processed/teams.csv")
 lista_times = teams["team"].tolist()
@@ -15,6 +16,8 @@ st.set_page_config(
 st.title(
     "⚽ CopaPredict IA"
 )
+
+times = listar_times()
 
 st.write(
     "Sistema de previsão de partidas usando Machine Learnig"
@@ -45,48 +48,20 @@ col1, col2 = st.columns(2)
 
 with col1:
 
-    home_attack_avg = st.number_input(
-        "Ataque Mandante",
-        value=2.0
+    home_team = st.selectbox(
+        "Mandante",
+        times,
+        index=times.index("Brazil")
     )
-
-    home_defense_avg = st.number_input(
-        "Defesa Mandante",
-        value=1.0
-    )
-
-    home_form = st.number_input(
-        "Forma Mandante",
-        value=0.8
-    )
-
-    win_streak = st.number_input(
-        "Sequência de Vitórias",
-        value=3
-    )
-
 
 with col2:
 
-    away_attack_avg = st.number_input(
-        "Ataque Visitante",
-        value=1.5
+    away_team = st.selectbox(
+        "Visitante",
+        times,
+        index=times.index("Argentina")
     )
 
-    away_defense_avg = st.number_input(
-        "Defesa Visitante",
-        value=1.2
-    )
-
-    away_form = st.number_input(
-        "Forma Visitante",
-        value=0.5
-    )
-
-    loss_streak = st.number_input(
-        "Sequência de Derrotas",
-        value=1
-    )
 
 st.info(
     f"{home_team} x {away_team}"
@@ -95,34 +70,7 @@ st.info(
 if st.button(
     "🔮 Fazer previsão"
 ):
-    dados = {
-
-        "home_attack_avg": home_attack_avg,
-        "away_attack_avg": away_attack_avg,
-
-        "home_defense_avg": home_defense_avg,
-        "away_defense_avg": away_defense_avg,
-
-        "home_form": home_form,
-        "away_form": away_form,
-
-        "win_streak": win_streak,
-        "loss_streak": loss_streak,
-
-        "home_advantage": 1,
-
-        "tournament_weight": 5,
-
-        "home_continent_code": 1,
-        "away_continent_code": 1,
-
-        "same_continent": 0,
-
-        "attack_strength": 1.5,
-
-        "avg_goals": 2.4
-
-    }   
+    dados = gerar_features(home_team, away_team)
 
     resposta = requests.post(
         "http://127.0.0.1:8000/predict",
