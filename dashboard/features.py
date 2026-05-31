@@ -294,6 +294,20 @@ def listar_times():
         list(times)
     )
 
+def ultimos_jogos(time):
+
+    jogos = obter_jogos_time(time)
+
+    return jogos[
+        [
+            "date",
+            "home_team",
+            "away_team",
+            "home_score",
+            "away_score"
+        ]
+    ].tail(5)
+
 print(
     gerar_features(
         "Brazil",

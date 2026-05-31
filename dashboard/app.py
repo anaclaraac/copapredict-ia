@@ -7,7 +7,8 @@ from features import (
     listar_times,
     calcular_ataque,
     calcular_defesa,
-    calcular_forma
+    calcular_forma,
+    ultimos_jogos
 )
 
 st.set_page_config(
@@ -82,6 +83,21 @@ with col_stats2:
         f"📈 Forma: {calcular_forma(away_team):.2f}"
     )
 
+    st.markdown("## Últimos jogos")
+
+    col_hist1, col_hist2 = st.columns(2)
+
+with col_hist1:
+
+    st.dataframe(
+        ultimos_jogos(home_team)
+    )
+
+with col_hist2:
+
+    st.dataframe(
+        ultimos_jogos(away_team)
+    )
 if st.button("🔮 Fazer previsão"):
 
     dados = gerar_features(
