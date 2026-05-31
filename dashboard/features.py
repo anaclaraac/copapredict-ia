@@ -280,9 +280,27 @@ def gerar_features(
 
     }
 
+def listar_times():
+
+    times = set(
+        matches["home_team"]
+    )
+
+    times.update(
+        matches["away_team"]
+    )
+
+    return sorted(
+        list(times)
+    )
+
 print(
     gerar_features(
         "Brazil",
         "Argentina"
     )
+)
+
+print(
+    listar_times()[:20]
 )
