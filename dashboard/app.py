@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from pathlib import Path
 from datetime import datetime
+
 from features import (
     gerar_features,
     listar_times,
@@ -22,12 +23,17 @@ HISTORY_FILE = (
     / "predictions.csv"
 )
 
+
 def salvar_previsao(
     home_team,
     away_team,
     prediction,
     probs
 ):
+    HISTORY_FILE.parent.mkdir(
+        parents=True,
+        exist_ok=True
+    )
 
     novo = pd.DataFrame([
         {
@@ -57,6 +63,9 @@ def salvar_previsao(
             index=False
         )
 
+
+# ---------------- CONFIGURAÇÃO ----------------
+
 st.set_page_config(
     page_title="CopaPredict IA",
     page_icon="⚽",
@@ -65,9 +74,16 @@ st.set_page_config(
 
 st.title("⚽ CopaPredict IA")
 
-st.write("Sistema de previsão de partidas usando Machine Learning")
+st.write(
+    "Sistema de previsão de partidas usando Machine Learning"
+)
+
+# ---------------- DADOS ----------------
 
 times = listar_times()
+ranking = ranking_forca()
+
+# ---------------- SELEÇÃO ----------------
 
 st.markdown("## Seleções")
 
@@ -91,13 +107,13 @@ with col2:
 
 st.info(f"{home_team} x {away_team}")
 
+# ---------------- ESTATÍSTICAS ----------------
+
 col_stats1, col_stats2 = st.columns(2)
 
 with col_stats1:
 
-    st.markdown(
-        f"### {home_team}"
-    )
+    st.markdown(f"### {home_team}")
 
     st.write(
         f"⚔️ Ataque: {calcular_ataque(home_team):.2f}"
@@ -113,9 +129,7 @@ with col_stats1:
 
 with col_stats2:
 
-    st.markdown(
-        f"### {away_team}"
-    )
+    st.markdown(f"### {away_team}")
 
     st.write(
         f"⚔️ Ataque: {calcular_ataque(away_team):.2f}"
@@ -129,9 +143,11 @@ with col_stats2:
         f"📈 Forma: {calcular_forma(away_team):.2f}"
     )
 
-    st.markdown("## Últimos jogos")
+# ---------------- HISTÓRICO DE JOGOS ----------------
 
-    col_hist1, col_hist2 = st.columns(2)
+st.markdown("## Últimos jogos")
+
+col_hist1, col_hist2 = st.columns(2)
 
 with col_hist1:
 
@@ -145,13 +161,21 @@ with col_hist2:
         ultimos_jogos(away_team)
     )
 
-st.markdown(
-    "## Ranking IA"
-)
+# ---------------- RANKING ----------------
+
+st.markdown("## Ranking IA")
 
 st.dataframe(
-    ranking_forca().head(20)
+    ranking.head(20)
 )
+
+st.markdown("## 🏆 Top 10 Seleções")
+
+st.dataframe(
+    ranking.head(10)
+)
+
+# ---------------- PREVISÃO ----------------
 
 if st.button("🔮 Fazer previsão"):
 
@@ -165,13 +189,38 @@ if st.button("🔮 Fazer previsão"):
         json=dados
     )
 
-    if resposta.status_code == 200:
+    if resposta.status_code != 200:
+
+        st.error(
+            f"Erro na API ({resposta.status_code})"
+        )
+
+    else:
 
         resultado = resposta.json()
 
-        if "prediction" in resultado:
+        if "prediction" not in resultado:
+
+            st.error(resultado)
+
+        else:
 
             probs = resultado["probabilities"]
+
+            prob_vitoria = round(
+                probs["vitoria"] * 100,
+                2
+            )
+
+            prob_empate = round(
+                probs["empate"] * 100,
+                2
+            )
+
+            prob_derrota = round(
+                probs["derrota"] * 100,
+                2
+            )
 
             mapa = {
                 0: "Derrota",
@@ -188,33 +237,25 @@ if st.button("🔮 Fazer previsão"):
                 probs
             )
 
-            st.success(
-                f"Resultado previsto: {mapa[classe]}"
-            )
-            probs = resultado["probabilities"]
+            if classe == 2:
 
-            prob_derrota = probs["derrota"]
-            prob_empate = probs["empate"]
-            prob_vitoria = probs["vitoria"]
+                st.success(
+                    f"🏆 Resultado previsto: {mapa[classe]}"
+                )
 
-            prob_derrota = round(
-                prob_derrota * 100,
-                2
-            )
+            elif classe == 1:
 
-            prob_empate = round(
-                prob_empate * 100,
-                2
-            )
+                st.warning(
+                    f"🤝 Resultado previsto: {mapa[classe]}"
+                )
 
-            prob_vitoria = round(
-                prob_vitoria * 100,
-                2
-            )
+            else:
 
-            st.subheader(
-                "Probabilidades"
-            )
+                st.error(
+                    f"❌ Resultado previsto: {mapa[classe]}"
+                )
+
+            st.subheader("Probabilidades")
 
             st.write(
                 f"🏆 Vitória ({prob_vitoria}%)"
@@ -248,21 +289,21 @@ if st.button("🔮 Fazer previsão"):
 
                 st.metric(
                     "Vitória",
-                    f"{probs['vitoria'] * 100:.1f}%"
+                    f"{prob_vitoria:.1f}%"
                 )
 
             with col_prob2:
 
                 st.metric(
                     "Empate",
-                    f"{probs['empate'] * 100:.1f}%"
+                    f"{prob_empate:.1f}%"
                 )
 
             with col_prob3:
 
                 st.metric(
                     "Derrota",
-                    f"{probs['derrota'] * 100:.1f}%"
+                    f"{prob_derrota:.1f}%"
                 )
 
             fig, ax = plt.subplots(
@@ -293,24 +334,18 @@ if st.button("🔮 Fazer previsão"):
                 use_container_width=False
             )
 
-        else:
+# ---------------- HISTÓRICO DE PREVISÕES ----------------
 
-            st.error(resultado)
+if HISTORY_FILE.exists():
 
-        if HISTORY_FILE.exists():
+    st.markdown(
+        "## 📜 Histórico de Previsões"
+    )
 
-            st.markdown("## Histórico de previsões")
+    historico = pd.read_csv(
+        HISTORY_FILE
+    )
 
-            historico = pd.read_csv(
-                HISTORY_FILE
-            )
-
-            st.dataframe(
-                historico.tail(20)
-            )
-
-    else:
-
-        st.error(
-            f"Erro na API ({resposta.status_code})"
-        )
+    st.dataframe(
+        historico.tail(10)
+    )

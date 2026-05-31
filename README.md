@@ -1,14 +1,34 @@
-# CopaPredict AI
+# CopaPredict IA
 
-Sistema de previsão de partidas da Copa do Mundo utilizando Machine Learning.
+Sistema de previsão de resultados de partidas de futebol utilizando Machine Learning.
 
 ## Tecnologias
 
 - Python
 - Pandas
-- Scikit-learn
-- XGBoost
+- Scikit-Learn
 - FastAPI
 - Streamlit
+- Matplotlib
 
-Projeto em desenvolvimento.
+## Modelo
+
+Regressão Logística
+
+Acurácia: 60%
+
+## Funcionalidades
+
+- Previsão de partidas
+- Probabilidade de vitória
+- Ranking de seleções
+- Histórico de jogos
+- Histórico de previsões
+
+## Executar API
+
+uvicorn api.main:app --reload
+
+## Executar Dashboard
+
+streamlit run dashboard/app.py

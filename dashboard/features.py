@@ -345,6 +345,12 @@ def ranking_forca():
         ascending=False
     )
 
+    ranking = ranking.reset_index(
+    drop=True
+    )
+
+    ranking.index += 1
+
     return ranking
 
 print(
