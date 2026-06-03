@@ -10,17 +10,18 @@ modelo = joblib.load(
     MODEL_PATH
 )
 
+print(modelo.classes_)
+
 def prever(dados):
 
     entrada = pd.DataFrame([dados])
 
-    pred = modelo.predict(
-        entrada
-    )[0]
+    pred = modelo.predict(entrada)[0]
 
-    probs = modelo.predict_proba(
-        entrada
-    )[0]
+    probs = modelo.predict_proba(entrada)[0]
+
+    print("Predição:", pred)
+    print("Probabilidades:", probs)
 
     return {
 

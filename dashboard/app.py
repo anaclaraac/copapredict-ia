@@ -80,8 +80,18 @@ st.write(
 
 # ---------------- DADOS ----------------
 
-times = listar_times()
-ranking = ranking_forca()
+@st.cache_data
+def carregar_times():
+    return listar_times()
+
+times = carregar_times()
+
+
+@st.cache_data
+def carregar_ranking():
+    return ranking_forca()
+
+ranking = carregar_ranking()
 
 # ---------------- SELEÇÃO ----------------
 
@@ -169,12 +179,6 @@ st.dataframe(
     ranking.head(20)
 )
 
-st.markdown("## 🏆 Top 10 Seleções")
-
-st.dataframe(
-    ranking.head(10)
-)
-
 # ---------------- PREVISÃO ----------------
 
 if st.button("🔮 Fazer previsão"):
@@ -184,9 +188,12 @@ if st.button("🔮 Fazer previsão"):
         away_team
     )
 
+    st.write(dados)
+
     resposta = requests.post(
         "http://127.0.0.1:8000/predict",
-        json=dados
+        json=dados,
+        timeout=10
     )
 
     if resposta.status_code != 200:
@@ -342,9 +349,10 @@ if HISTORY_FILE.exists():
         "## 📜 Histórico de Previsões"
     )
 
-    historico = pd.read_csv(
-        HISTORY_FILE
-    )
+    def carregar_historico():
+        return pd.read_csv(HISTORY_FILE)
+
+    historico = carregar_historico()
 
     st.dataframe(
         historico.tail(10)

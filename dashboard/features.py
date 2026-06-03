@@ -1,5 +1,6 @@
 import pandas as pd
 from pathlib import Path
+import streamlit as st
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -10,9 +11,58 @@ DATA_PATH = (
     / "matches_clean.csv"
 )
 
-matches = pd.read_csv(
-    DATA_PATH
-)
+matches = pd.read_csv(DATA_PATH)
+
+SELECOES_COPA_2026 = [
+    "Algeria",
+    "Argentina",
+    "Australia",
+    "Austria",
+    "Belgium",
+    "Bosnia and Herzegovina",
+    "Brazil",
+    "Canada",
+    "Cape Verde",
+    "Colombia",
+    "Curaçao",
+    "Czechia",
+    "DR Congo",
+    "Ecuador",
+    "Egypt",
+    "England",
+    "France",
+    "Germany",
+    "Ghana",
+    "Haiti",
+    "Iran",
+    "Iraq",
+    "Ivory Coast",
+    "Japan",
+    "Jordan",
+    "Mexico",
+    "Morocco",
+    "Netherlands",
+    "New Zealand",
+    "Norway",
+    "Panama",
+    "Paraguay",
+    "Portugal",
+    "Qatar",
+    "Saudi Arabia",
+    "Scotland",
+    "Senegal",
+    "South Africa",
+    "South Korea",
+    "Spain",
+    "Sweden",
+    "Switzerland",
+    "Tunisia",
+    "Türkiye",
+    "United States",
+    "Uruguay",
+    "Uzbekistan"
+]
+
 
 def obter_jogos_time(time):
 
@@ -22,6 +72,16 @@ def obter_jogos_time(time):
         (matches["away_team"] == time)
     ]
 
+    jogos = jogos[
+    jogos["home_team"].isin(
+        SELECOES_COPA_2026
+    )
+    &
+    jogos["away_team"].isin(
+        SELECOES_COPA_2026
+    )
+    ]
+
     jogos = jogos.dropna(
         subset=[
             "home_score",
@@ -29,9 +89,7 @@ def obter_jogos_time(time):
         ]
     )
 
-    jogos = jogos.sort_values(
-        "date"
-    )
+    jogos = jogos.sort_values("date")
 
     jogos = jogos.tail(10)
 
@@ -83,49 +141,37 @@ def calcular_defesa(time):
 
     return sum(sofridos) / len(sofridos)
 
+
 def calcular_forma(time):
 
-    jogos = obter_jogos_time(
-        time
-    )
+    jogos = obter_jogos_time(time)
 
     vitorias = 0
 
     for _, jogo in jogos.iterrows():
 
         if (
-
             jogo["home_team"] == time
-
             and
-
-            jogo["home_score"] >
-            jogo["away_score"]
-
+            jogo["home_score"] > jogo["away_score"]
         ):
 
             vitorias += 1
 
         elif (
-
             jogo["away_team"] == time
-
             and
-
-            jogo["away_score"] >
-            jogo["home_score"]
-
+            jogo["away_score"] > jogo["home_score"]
         ):
 
             vitorias += 1
 
     return vitorias / len(jogos)
 
+
 def calcular_win_streak(time):
 
-    jogos = obter_jogos_time(
-        time
-    )
+    jogos = obter_jogos_time(time)
 
     sequencia = 0
 
@@ -141,17 +187,17 @@ def calcular_win_streak(time):
         if (
             jogo["home_team"] == time
             and
-            jogo["home_score"] >
-            jogo["away_score"]
+            jogo["home_score"] > jogo["away_score"]
         ):
+
             venceu = True
 
         elif (
             jogo["away_team"] == time
             and
-            jogo["away_score"] >
-            jogo["home_score"]
+            jogo["away_score"] > jogo["home_score"]
         ):
+
             venceu = True
 
         if venceu:
@@ -164,11 +210,10 @@ def calcular_win_streak(time):
 
     return sequencia
 
+
 def calcular_loss_streak(time):
 
-    jogos = obter_jogos_time(
-        time
-    )
+    jogos = obter_jogos_time(time)
 
     sequencia = 0
 
@@ -184,17 +229,17 @@ def calcular_loss_streak(time):
         if (
             jogo["home_team"] == time
             and
-            jogo["home_score"] <
-            jogo["away_score"]
+            jogo["home_score"] < jogo["away_score"]
         ):
+
             perdeu = True
 
         elif (
             jogo["away_team"] == time
             and
-            jogo["away_score"] <
-            jogo["home_score"]
+            jogo["away_score"] < jogo["home_score"]
         ):
+
             perdeu = True
 
         if perdeu:
@@ -206,6 +251,7 @@ def calcular_loss_streak(time):
             break
 
     return sequencia
+
 
 def gerar_features(
     home_team,
@@ -280,6 +326,7 @@ def gerar_features(
 
     }
 
+@st.cache_data
 def listar_times():
 
     times = set(
@@ -290,10 +337,15 @@ def listar_times():
         matches["away_team"]
     )
 
+    times = times.intersection(
+        SELECOES_COPA_2026
+    )
+
     return sorted(
         list(times)
     )
 
+@st.cache_data
 def ultimos_jogos(time):
 
     jogos = obter_jogos_time(time)
@@ -307,6 +359,7 @@ def ultimos_jogos(time):
             "away_score"
         ]
     ].tail(5)
+
 
 def ranking_forca():
 
@@ -346,12 +399,13 @@ def ranking_forca():
     )
 
     ranking = ranking.reset_index(
-    drop=True
+        drop=True
     )
 
     ranking.index += 1
 
     return ranking
+
 
 print(
     gerar_features(
